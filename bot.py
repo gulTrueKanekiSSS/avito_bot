@@ -41,9 +41,12 @@ async def welcome_message(message: types.Message, state=FSMContext):
 
 @dp.message_handler(Text(equals="Опубликовать"))
 async def set_category(message: types.Message, state: FSMContext):
-    await message.delete()
-    await state.set_state(Good.wait_category.state)
-    await message.answer('Выбери категорию товара:', reply_markup=keyboard_with_categories)
+    if message.from_user.username is None:
+        await message.answer("Для того чтобы опубликовать товар, пожалуйста, укажите пользовательское имя в своем профиле телеграмм", reply_markup=keyboard)
+    else:
+        await message.delete()
+        await state.set_state(Good.wait_category.state)
+        await message.answer('Выбери категорию товара:', reply_markup=keyboard_with_categories)
 
 
 @dp.message_handler(content_types=['text'], state=Good.wait_category)
