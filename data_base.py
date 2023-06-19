@@ -18,6 +18,7 @@ class User_good(db.Model):
     price = db.Column(db.Integer)
     photo = db.Column(db.Integer)
 
+
 class User_good_schema(Schema):
     id = fields.Int()
     trader = fields.Str()
