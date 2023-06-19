@@ -20,6 +20,7 @@ class User_good(db.Model):
 
 
 
+
 class User_good_schema(Schema):
     id = fields.Int()
     trader = fields.Str()
