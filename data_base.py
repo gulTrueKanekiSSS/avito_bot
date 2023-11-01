@@ -1,11 +1,5 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from marshmallow import Schema, fields
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///goods.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+from config import db, app
 
 class User_good(db.Model):
     __tablename__ = 'goods'
@@ -17,6 +11,7 @@ class User_good(db.Model):
     description = db.Column(db.String)
     price = db.Column(db.Integer)
     photo = db.Column(db.Integer)
+    is_goods_not_dangerous = db.Column(db.Boolean)
 
 
 
@@ -30,6 +25,7 @@ class User_good_schema(Schema):
     description = fields.Str()
     price = fields.Int()
     photo = fields.Str()
+    is_goods_not_dangerous = fields.Bool()
 
 
 app.app_context().push()

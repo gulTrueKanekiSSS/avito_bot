@@ -2,20 +2,6 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from data_base import User_good, db
 
 
-def count_items():
-    with db.session.begin():
-        local_goods = len(db.session.query(User_good).filter(User_good.category == 'Личные вещи').all())
-        electronic = len(db.session.query(User_good).filter(User_good.category == 'Электроника').all())
-        bikes_and_tools = len(db.session.query(User_good).filter(User_good.category == 'Велосипеды и запчасти').all())
-        vehicle_and_tools = len(db.session.query(User_good).filter(User_good.category == 'Автомобили и запчасти').all())
-        items_for_home = len(db.session.query(User_good).filter(User_good.category == 'Вещи для дома').all())
-        accesories = len(db.session.query(User_good).filter(User_good.category == 'Аксессуары').all())
-        db.session.close()
-    return [local_goods, electronic, bikes_and_tools, vehicle_and_tools, items_for_home, accesories]
-
-items = count_items()
-
-
 keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
 button_1 = KeyboardButton(text='Опубликовать')
 button_2 = KeyboardButton(text='Купить')
